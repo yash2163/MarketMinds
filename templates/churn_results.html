@@ -2,28 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Customer Churn Prediction Results</title>
+    <title>Churn Results</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
   </head>
   <body>
-    <h2>Customer Churn Prediction Results</h2>
-
-    <div>
-      <h3>Churn Distribution</h3>
-      <img
-        src="data:image/png;base64,{{ churn_plot_url }}"
-        alt="Churn Distribution Plot"
-      />
-    </div>
-
-    <div>
-      <h3>Download Churn Results</h3>
-      <a href="{{ download_link }}" download>Download Churn Results CSV</a>
-    </div>
-
-    <a href="{{ url_for('index') }}">Go Back</a>
+    <h1>Churn Prediction Results</h1>
+    <img src="{{ plot_url }}" alt="Churn Plot" />
+    <h2>Churn Results Table</h2>
+    {{ churn_results|safe }}
+    <a href="{{ url_for('download_churn_results') }}"
+      >Download Churn Results CSV</a
+    >
   </body>
 </html>

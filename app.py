@@ -10,20 +10,22 @@ from io import BytesIO
 import base64
 import os
 from werkzeug.utils import secure_filename
-from config import UPLOAD_FOLDER, MONGO_URI, SECRET_KEY
 import joblib
 import logging
 import numpy as np
 import datetime
 from sklearn.linear_model import LinearRegression
+from flask import send_from_directory
 
 # Set the Matplotlib backend to 'Agg' to avoid GUI issues on macOS
 matplotlib.use('Agg')
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MONGO_URI'] = MONGO_URI
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['UPLOAD_FOLDER'] = 'uploads'  # Update if needed
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/yourdatabase'  # Update if needed
+app.config['SECRET_KEY'] = 'your_secret_key'  # Update if needed
+app.config['RESULTS_FOLDER'] = os.path.join(app.root_path, 'static')
+
 mongo = PyMongo(app)
 
 # Set up logging for better error tracking
@@ -57,30 +59,67 @@ def generate_cluster_plot(df, labels):
     return fig  # Return the figure object
 
 def generate_feature_importance_plot(df):
-    # Dummy feature importance: using variance as a proxy for importance
-    importance = df.var()
-    
-    fig, ax = plt.subplots()
-    ax.bar(range(len(df.columns)), importance)
+    # Example implementation; replace with actual logic for feature importance
+    feature_importance = np.random.rand(df.shape[1])  # Dummy feature importances
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.bar(df.columns, feature_importance)
+    ax.set_title('Feature Importances')
     ax.set_xlabel('Features')
-    ax.set_ylabel('Variance (used as importance)')
-    ax.set_title('Feature Importance')
-    ax.set_xticks(range(len(df.columns)))
-    ax.set_xticklabels(df.columns, rotation=90)
-    
-    return fig  # Return the figure object
+    ax.set_ylabel('Importance')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    return fig
+
 
 def convert_plot_to_base64(figure):
-    buf = BytesIO()
-    figure.savefig(buf, format='png')
-    buf.seek(0)
-    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
-    plt.close(figure)  # Close the figure to free up resources
-    return 'data:image/png;base64,' + image_base64
+    try:
+        buf = BytesIO()
+        figure.savefig(buf, format='png')
+        buf.seek(0)
+        image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
+        plt.close(figure)  # Close the figure to free up resources
+        app.logger.info('Plot converted to base64.')
+        return 'data:image/png;base64,' + image_base64
+    except Exception as e:
+        app.logger.error('Error converting plot to base64: %s', str(e))
+        raise
 
 def get_cluster_info(df, labels):
     cluster_info = df.groupby(labels).mean().to_dict()
     return cluster_info
+
+def preprocess_data(df):
+    # Example preprocessing steps
+    df = df.dropna()  # Remove missing values
+    df = pd.get_dummies(df)  # Convert categorical columns to numeric
+    return df
+
+def generate_churn_plot(churn_results):
+    try:
+        app.logger.info('Generating churn plot...')
+        fig, ax = plt.subplots(figsize=(10, 6))
+        churn_results['Churn Label'].value_counts().plot(kind='bar', ax=ax)
+        ax.set_title('Churn Distribution')
+        ax.set_xlabel('Churn Label')
+        ax.set_ylabel('Count')
+        plt.tight_layout()
+        app.logger.info('Churn plot generated.')
+        return fig
+    except Exception as e:
+        app.logger.error('Error generating churn plot: %s', str(e))
+        raise
+
+def process_churn_data(df):
+    try:
+        # Placeholder for churn prediction logic
+        # Replace with actual model predictions
+        churn_results = df.copy()  # Example placeholder
+        churn_results['Churn Label'] = np.random.randint(0, 2, size=len(df))  # Dummy prediction
+        return churn_results, df
+    except Exception as e:
+        app.logger.error(f"Error during churn data processing: {str(e)}")
+        raise
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -114,7 +153,7 @@ def index():
                 return redirect(url_for('process_segmentation', filename=filename))
             elif choice == 'sales_prediction':
                 return redirect(url_for('process_sales_prediction', filename=filename))
-            elif choice == 'churn_prediction':  # Handle churn prediction
+            elif choice == 'churn_prediction':
                 return redirect(url_for('process_churn_prediction', filename=filename))
 
         flash('Invalid file format')
@@ -156,7 +195,8 @@ def process_segmentation(filename):
     # Generate visualizations
     try:
         cluster_plot = generate_cluster_plot(df_scaled, labels)
-        feature_importance_plot = generate_feature_importance_plot(df_scaled)
+        # Assuming you have a function for feature importance plot
+        feature_importance_plot = generate_feature_importance_plot(df_scaled)  # Define this function if needed
 
         cluster_plot_url = convert_plot_to_base64(cluster_plot)
         feature_importance_plot_url = convert_plot_to_base64(feature_importance_plot)
@@ -170,35 +210,28 @@ def process_segmentation(filename):
                            feature_importance_plot_url=feature_importance_plot_url,
                            cluster_info=cluster_info)
 
-
 @app.route('/process_sales_prediction/<filename>')
 def process_sales_prediction(filename):
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     df = pd.read_csv(filepath)
 
     try:
-        # Ensure the 'Date' column is correctly formatted as datetime
         df['Date'] = pd.to_datetime(df['Date'])
         df = df.set_index('Date')
-
-        # Prepare data for training
-        df = df.reset_index()  # Reset index to use 'Date' as a column for training
-        df['Day'] = (df['Date'] - df['Date'].min()).dt.days  # Create a numerical feature from dates
+        df = df.reset_index()
+        df['Day'] = (df['Date'] - df['Date'].min()).dt.days
         X = df[['Day']]
-        y = df['Sales']  # Assuming 'Sales' is the column with sales data
+        y = df['Sales']
 
-        # Train a new model
         model = LinearRegression()
         model.fit(X, y)
 
-        # Save the trained model to a file
         model_path = os.path.join(app.config['UPLOAD_FOLDER'], f'sales_model_{filename}.pkl')
         joblib.dump(model, model_path)
 
-        # Generate future dates and predict sales
         future_dates = pd.date_range(start=df['Date'].max() + pd.Timedelta(days=10), periods=19, freq='10D')
-        future_days = (future_dates - df['Date'].min()).days.to_numpy()  # Convert to NumPy array
-        future_days = future_days.reshape(-1, 1)  # Reshape for the model input
+        future_days = (future_dates - df['Date'].min()).days.to_numpy()
+        future_days = future_days.reshape(-1, 1)
         future_predictions = model.predict(future_days)
 
         future_sales_df = pd.DataFrame({
@@ -206,66 +239,83 @@ def process_sales_prediction(filename):
             'Predicted Sales': future_predictions
         })
 
-        # Plotting future sales predictions
-        sales_plot = plt.figure()
-        plt.plot(future_sales_df['Date'], future_sales_df['Predicted Sales'])
-        plt.xlabel('Date')
-        plt.ylabel('Predicted Sales')
-        plt.title('Future Sales Predictions')
-        sales_plot_url = convert_plot_to_base64(sales_plot)
-
-        # Calculate summary statistics
+        highest_sales_index = future_sales_df['Predicted Sales'].idxmax()
+        lowest_sales_index = future_sales_df['Predicted Sales'].idxmin()
         sales_summary = {
-            'highest_sales_date': future_sales_df.loc[future_sales_df['Predicted Sales'].idxmax()]['Date'],
-            'lowest_sales_date': future_sales_df.loc[future_sales_df['Predicted Sales'].idxmin()]['Date']
+            'highest_sales_date': future_sales_df.loc[highest_sales_index, 'Date'].strftime('%Y-%m-%d'),
+            'lowest_sales_date': future_sales_df.loc[lowest_sales_index, 'Date'].strftime('%Y-%m-%d'),
         }
+
+        sales_plot = plt.figure(figsize=(12, 6))
+        plt.plot(df['Date'], df['Sales'], label='Historical Sales')
+        plt.plot(future_dates, future_predictions, label='Predicted Sales', linestyle='--')
+        plt.xlabel('Date')
+        plt.ylabel('Sales')
+        plt.title('Sales Prediction')
+        plt.legend()
+        plt.tight_layout()
+
+        sales_plot_path = os.path.join(app.config['RESULTS_FOLDER'], 'sales_plot.png')
+        sales_plot.savefig(sales_plot_path)
+        plt.close(sales_plot)
+
+        if not os.path.isfile(sales_plot_path):
+            app.logger.error(f"Plot file not found: {sales_plot_path}")
+
+        predictions = future_sales_df.to_dict(orient='records')
+
+        return render_template('sales_results.html',
+                               sales_plot_url=url_for('static', filename='sales_plot.png'),
+                               sales_summary=sales_summary,
+                               predictions=predictions)
     except Exception as e:
-        flash(f"Error processing sales prediction: {e}")
+        app.logger.error(f"Error during sales prediction: {str(e)}")
+        flash(f"Error during sales prediction: {e}")
         return redirect(url_for('index'))
 
-    return render_template('sales_results.html', sales_plot_url=sales_plot_url, sales_summary=sales_summary)
+@app.route('/process_churn_prediction/<filename>')
+def process_churn_prediction(filename):
+    app.logger.debug(f'Filename received for churn prediction: {filename}')
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    app.logger.debug(f'Filepath constructed: {filepath}')
+    
+    if not os.path.isfile(filepath):
+        app.logger.error(f'File does not exist: {filepath}')
+        flash('File not found')
+        return redirect(url_for('index'))
+    
+    try:
+        df = pd.read_csv(filepath)
+        churn_results, _ = process_churn_data(df)
 
-@app.route('/process_churn_prediction', methods=['GET', 'POST'])
-def process_churn_prediction():
-    if request.method == 'POST':
-        file = request.files.get('file')
+        # Generate and save churn plot
+        churn_plot = generate_churn_plot(churn_results)
+        churn_plot_path = os.path.join('static', 'churn_plot.png')  # Save in 'static'
+        churn_plot.savefig(churn_plot_path)
+        plt.close(churn_plot)
 
-        if not file or file.filename == '':
-            flash('No file provided or file not selected.')
-            return redirect(url_for('index'))
+        # Save churn results CSV to static
+        churn_results_filepath = os.path.join('static', 'churn_results.csv')  # Save in 'static'
+        churn_results.to_csv(churn_results_filepath, index=False)
+        
+        return render_template('churn_results.html', plot_url=url_for('static', filename='churn_plot.png'),
+                               churn_results=churn_results.to_html(classes='table table-striped'),
+                               download_link=url_for('download_churn_results'))
+    except Exception as e:
+        app.logger.error(f"Error during churn prediction: {str(e)}")
+        flash(f"Error during churn prediction: {e}")
+        return redirect(url_for('index'))
 
-        if not allowed_file(file.filename):
-            flash('Invalid file format. Please upload a CSV file.')
-            return redirect(url_for('index'))
-
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-
-        # Preprocess the data and predict churn
-        try:
-            churn_results, df_processed = process_churn_data(filepath)
-            print("Churn results processed:", churn_results.head())  # Debugging log
-
-            # Save results for download
-            result_filepath = os.path.join(app.config['UPLOAD_FOLDER'], f'churn_results_{filename}')
-            churn_results.to_csv(result_filepath, index=False)
-            print(f"Results saved to {result_filepath}")  # Debugging log
-
-            # Generate plots for insights
-            churn_plot = generate_churn_plot(churn_results)
-            churn_plot_url = convert_plot_to_base64(churn_plot)
-            print("Churn plot generated successfully.")  # Debugging log
-
-            return render_template('churn_results.html',
-                                   churn_plot_url=churn_plot_url,
-                                   download_link=result_filepath)
-        except Exception as e:
-            flash(f"Error processing churn prediction: {e}")
-            print(f"Error processing churn prediction: {e}")  # Debugging log
-            return redirect(url_for('index'))
-
-    return render_template('index.html')
+    
+@app.route('/download_churn_results')
+def download_churn_results():
+    try:
+        filename = 'churn_results.csv'  # Ensure this matches the file saved earlier
+        return send_from_directory('static', filename, as_attachment=True)
+    except Exception as e:
+        app.logger.error(f"Error serving file: {str(e)}")
+        flash(f"Error serving file: {e}")
+        return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
