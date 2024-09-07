@@ -1,0 +1,31 @@
+/* General Body Style */
+body {
+  background-color: #000000;
+  color: #333;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Custom Heading Style */
+.container h1 {
+  color: #d22121;
+}
+
+/* List Group Styling */
+.list-group-item {
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+/* Alert Box */
+.alert-primary {
+  font-size: 1.2rem;
+}

@@ -1,21 +1,21 @@
 age,gender,region_category,membership_category,joined_through_referral,preferred_offer_types,medium_of_operation,internet_option,days_since_last_login,avg_time_spent,avg_transaction_value,avg_frequency_login_days,points_in_wallet,used_special_discount,offer_application_preference,past_complaint,complaint_status,feedback,Churn Label
-28,Non-binary,Tier 4,Bronze,Yes,Free Trial,Web,Broadband,9,14.5,300,2.2,120,Yes,Email,Yes,Closed,Positive,1
-41,Female,Tier 2,Silver,No,Cashback,App,Wi-Fi,20,21.8,550,3.5,380,No,App,Yes,Open,Negative,1
-38,Male,Tier 3,Gold,Yes,Discount,Web,Mobile Data,8,12.0,420,1.9,220,Yes,Email,No,Closed,Neutral,0
+28,Non-binary,Tier 4,Bronze,Yes,Free Trial,Web,Broadband,9,14.5,300,2.2,120,Yes,Email,Yes,Closed,Positive,0
+41,Female,Tier 2,Silver,No,Cashback,App,Wi-Fi,20,21.8,550,3.5,380,No,App,Yes,Open,Negative,0
+38,Male,Tier 3,Gold,Yes,Discount,Web,Mobile Data,8,12.0,420,1.9,220,Yes,Email,No,Closed,Neutral,1
 29,Female,Tier 1,Platinum,No,BOGO,App,Broadband,16,19.5,650,4.8,480,No,App,Yes,Open,Positive,1
 45,Non-binary,Tier 4,Bronze,Yes,Free Trial,Web,Wi-Fi,11,13.8,320,2.1,140,Yes,Email,No,Closed,Negative,0
 31,Male,Tier 2,Silver,No,Cashback,App,Mobile Data,18,20.8,580,3.8,400,No,App,Yes,Open,Neutral,0
-43,Female,Tier 3,Gold,Yes,Discount,Web,Broadband,14,18.0,450,2.0,200,Yes,Email,No,Closed,Positive,1
+43,Female,Tier 3,Gold,Yes,Discount,Web,Broadband,14,18.0,450,2.0,200,Yes,Email,No,Closed,Positive,0
 30,Non-binary,Tier 1,Platinum,No,BOGO,App,Wi-Fi,17,22.0,680,4.5,520,No,App,Yes,Open,Negative,0
-46,Male,Tier 4,Bronze,Yes,Free Trial,Web,Mobile Data,10,15.0,360,2.5,160,Yes,Email,No,Closed,Neutral,1
-39,Female,Tier 2,Silver,No,Cashback,App,Broadband,19,21.5,600,3.2,420,No,App,Yes,Open,Positive,1
+46,Male,Tier 4,Bronze,Yes,Free Trial,Web,Mobile Data,10,15.0,360,2.5,160,Yes,Email,No,Closed,Neutral,0
+39,Female,Tier 2,Silver,No,Cashback,App,Broadband,19,21.5,600,3.2,420,No,App,Yes,Open,Positive,0
 27,Non-binary,Tier 1,Gold,Yes,Discount,Web,Wi-Fi,13,16.8,440,2.3,240,Yes,Email,No,Closed,Negative,0
-42,Male,Tier 3,Platinum,No,BOGO,App,Mobile Data,21,24.0,720,4.9,580,No,App,Yes,Open,Neutral,0
+42,Male,Tier 3,Platinum,No,BOGO,App,Mobile Data,21,24.0,720,4.9,580,No,App,Yes,Open,Neutral,1
 34,Female,Tier 2,Bronze,Yes,Free Trial,Web,Broadband,6,12.8,300,1.8,120,Yes,Email,No,Closed,Positive,0
 48,Non-binary,Tier 4,Silver,No,Cashback,App,Wi-Fi,22,25.5,780,5.5,640,No,App,Yes,Open,Negative,1
-36,Male,Tier 1,Gold,Yes,Discount,Web,Mobile Data,23,26.8,820,6.2,680,Yes,Email,No,Closed,Neutral,1
-33,Female,Tier 3,Platinum,No,BOGO,App,Broadband,24,28.0,880,7.0,720,No,App,Yes,Open,Positive,1
-49,Non-binary,Tier 4,Bronze,Yes,Free Trial,Web,Wi-Fi,25,30.0,920,8.0,800,Yes,Email,No,Closed,Negative,1
-35,Male,Tier 2,Silver,No,Cashback,App,Mobile Data,26,31.5,960,8.5,840,No,App,Yes,Open,Neutral,1
+36,Male,Tier 1,Gold,Yes,Discount,Web,Mobile Data,23,26.8,820,6.2,680,Yes,Email,No,Closed,Neutral,0
+33,Female,Tier 3,Platinum,No,BOGO,App,Broadband,24,28.0,880,7.0,720,No,App,Yes,Open,Positive,0
+49,Non-binary,Tier 4,Bronze,Yes,Free Trial,Web,Wi-Fi,25,30.0,920,8.0,800,Yes,Email,No,Closed,Negative,0
+35,Male,Tier 2,Silver,No,Cashback,App,Mobile Data,26,31.5,960,8.5,840,No,App,Yes,Open,Neutral,0
 26,Female,Tier 1,Gold,Yes,Discount,App,Wi-Fi,8,16.5,480,2.8,220,Yes,Email,No,Closed,Positive,0
 41,Non-binary,Tier 3,Platinum,No,BOGO,Web,Broadband,16,21.0,680,4.2,520,No,App,Yes,Open,Neutral,1

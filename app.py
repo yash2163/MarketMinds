@@ -161,6 +161,36 @@ def index():
 
     return render_template('index.html')
 
+# Route for about page
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contactMe')
+def contact_me():
+    return render_template('contactMe.html')
+
+@app.route('/howToUse')
+def howTouse():
+    return render_template('howToUse.html')
+
+
+@app.route('/submit_contact_form', methods=['POST'])
+def submit_contact_form():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    subject = request.form.get('subject')
+    message = request.form.get('message')
+    urgency = request.form.get('urgency')
+
+    # Process form data (e.g., save to database, send email, etc.)
+    # For now, we'll just print it to the console
+    app.logger.info(f"Received contact form submission: {name}, {email}, {subject}, {message}, {urgency}")
+
+    # Redirect back to the contact page with a success message
+    flash('Your message has been sent successfully!', 'success')
+    return redirect(url_for('contact_me'))
+
 @app.route('/process_segmentation/<filename>')
 def process_segmentation(filename):
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)

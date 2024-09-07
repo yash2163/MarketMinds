@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Use - MarketMinds</title>
+    <link rel="stylesheet" href="/static/styles/how-to-use.css" />
+    <!-- Link to external CSS file -->
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Internal CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        margin-bottom: 20px;
+      }
+
+      .navbar-brand {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+
+      h1,
+      h2 {
+        color: #007bff;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .feature {
+        margin-bottom: 20px;
+      }
+
+      .feature p {
+        margin-bottom: 10px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+      }
+
+      th {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .highlight {
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .btn {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">MarketMinds</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#future-sales"
+                >Future Sales Forecasting</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#customer-segmentation"
+                >Customer Segmentation</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#churn-prediction">Churn Prediction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#usage">Using the Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#help">Need Help?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>How to Use MarketMinds</h1>
+
+      <div id="future-sales" class="section">
+        <h2>Future Sales Forecasting</h2>
+        <div class="feature">
+          <h3>1. Future Sales Forecasting</h3>
+          <p>
+            This feature allows you to forecast future sales based on historical
+            data. You can input your sales data and select the forecasting model
+            to predict sales trends for the upcoming period.
+          </p>
+          <p>
+            <strong>Required Format:</strong> A CSV file with the following
+            columns:
+          </p>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Column</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Date</strong></td>
+                  <td>Date of the sales record (e.g., YYYY-MM-DD)</td>
+                </tr>
+                <tr>
+                  <td><strong>Sales</strong></td>
+                  <td>
+                    Amount of sales recorded on the given date (numeric value)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="customer-segmentation" class="section">
+        <h2>Customer Segmentation</h2>
+        <div class="feature">
+          <h3>2. Customer Segmentation</h3>
+          <p>
+            This feature helps in segmenting your customers based on their
+            behavior and demographics. You can upload customer data and get
+            insights into different customer segments for targeted marketing.
+          </p>
+          <p>
+            <strong>Required Format:</strong> A CSV file with the following
+            columns:
+          </p>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Column</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Customer ID</strong></td>
+                  <td>
+                    Unique identifier for each customer (e.g., numeric or
+                    alphanumeric)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Age</strong></td>
+                  <td>Age of the customer (numeric value)</td>
+                </tr>
+                <tr>
+                  <td><strong>Gender</strong></td>
+                  <td>Gender of the customer (e.g., Male, Female, Other)</td>
+                </tr>
+                <tr>
+                  <td><strong>Annual Income</strong></td>
+                  <td>Yearly income of the customer (numeric value)</td>
+                </tr>
+                <tr>
+                  <td><strong>Spending Score</strong></td>
+                  <td>
+                    A score representing the customer's spending behavior
+                    (numeric value)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="churn-prediction" class="section">
+        <h2>Churn Prediction</h2>
+        <div class="feature">
+          <h3>3. Churn Prediction</h3>
+          <p>
+            This feature predicts which customers are likely to stop using your
+            services. You can input customer data to analyze patterns and
+            identify high-risk customers.
+          </p>
+          <p>
+            <strong>Required Format:</strong> A CSV file with the following
+            columns:
+          </p>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Column</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Customer ID</strong></td>
+                  <td>
+                    Unique identifier for each customer (e.g., numeric or
+                    alphanumeric)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Age</strong></td>
+                  <td>Age of the customer (numeric value)</td>
+                </tr>
+                <tr>
+                  <td><strong>Gender</strong></td>
+                  <td>Gender of the customer (e.g., Male, Female, Other)</td>
+                </tr>
+                <tr>
+                  <td><strong>Tenure</strong></td>
+                  <td>
+                    Length of time the customer has been with the company
+                    (numeric value, in months)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Monthly Charges</strong></td>
+                  <td>Monthly charges for the service (numeric value)</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Charges</strong></td>
+                  <td>
+                    Total charges incurred by the customer (numeric value)
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Churn</strong></td>
+                  <td>
+                    Indicates if the customer has churned (binary: Yes/No)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="usage" class="section">
+        <h2>Using the Features</h2>
+        <p>To get started with MarketMinds, follow these steps:</p>
+        <ol>
+          <li>Choose the feature you want to use from the dashboard.</li>
+          <li>
+            Upload the required CSV file as per the format specified above.
+          </li>
+          <li>Configure the settings as needed for the selected feature.</li>
+          <li>Submit the data to receive analysis results and insights.</li>
+        </ol>
+      </div>
+
+      <div id="help" class="section">
+        <h2>Need Help?</h2>
+        <p>
+          If you have any questions or need assistance, feel free to
+          <a href="mailto:yashrajput2163@gmail.com" class="btn">Contact Me</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

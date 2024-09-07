@@ -1,0 +1,27 @@
+/* General Body Style */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+  
+  /* Custom Heading Style */
+  h1 {
+    color: #0056b3;
+  }
+  
+  /* Form Style */
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Flash Message Style */
+  .flash-message {
+    color: red;
+  }
+  

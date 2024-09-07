@@ -1,0 +1,118 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9f2f9; /* Very light blue background for the entire page */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  background-color: #ffffff; /* White background for content area */
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-section img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.profile-section h1 {
+  font-size: 28px;
+  margin: 10px 0;
+  color: #0033cc; /* Strong blue text color */
+}
+
+.profile-section p {
+  font-size: 16px;
+  color: #333333; /* Dark gray text color */
+}
+
+.profile-details {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-details a {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #0033cc; /* Strong blue text color */
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff; /* White background for the form area */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Light shadow for the form area */
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc; /* Light gray border */
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #ffffff; /* White background for input fields */
+  color: #0033cc; /* Strong blue text color for input fields */
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #999999; /* Light gray placeholder text */
+}
+
+.contact-form button {
+  padding: 10px 20px;
+  background-color: #0033cc; /* Strong blue background */
+  color: #ffffff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #002a99; /* Darker blue on hover */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  border-color: #0033cc; /* Strong blue border on focus */
+  outline: none;
+}
+
+.contact-form button[disabled] {
+  background-color: #cccccc; /* Light gray background for disabled button */
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+  }
+
+  .profile-section img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}

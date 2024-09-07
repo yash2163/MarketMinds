@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me - Yash Rajput</title>
+    <link rel="stylesheet" href="/static/styles/contactMe.css" />
+    <!-- Link to external CSS file -->
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Internal CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa; /* Light background color */
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        margin-bottom: 30px;
+        margin-left: -15px; /* Align with container */
+        margin-right: -15px; /* Align with container */
+      }
+
+      .navbar .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff;
+      }
+
+      .navbar-dark .navbar-nav .nav-link.active {
+        color: #d0e2ff; /* Light blue for active links */
+      }
+
+      .navbar-dark .navbar-brand {
+        color: #ffffff;
+      }
+
+      .navbar-dark .navbar-brand img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-section {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .profile-section h1 {
+        color: #007bff; /* Blue color for the name */
+      }
+
+      .profile-section p {
+        color: #333333; /* Dark grey color for text */
+      }
+
+      .profile-details {
+        margin-bottom: 40px;
+      }
+
+      .profile-details p {
+        color: #333333; /* Dark grey color for text */
+        font-size: 16px;
+      }
+
+      .profile-details a {
+        color: #007bff; /* Blue color for links */
+        text-decoration: none;
+      }
+
+      .profile-details a:hover {
+        text-decoration: underline;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .contact-form h2 {
+        color: #007bff; /* Blue color for form heading */
+        margin-bottom: 20px;
+      }
+
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+      }
+
+      .contact-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff; /* Blue background for the button */
+        border: none;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .contact-form button:hover {
+        background-color: #0056b3; /* Darker blue for button hover */
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333333; /* Dark grey for labels */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="https://via.placeholder.com/50x50.png"
+            alt="Logo"
+            width="30"
+            height="30"
+            class="d-inline-block align-text-top"
+          />
+          MarketMinds
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <!-- <img src="profile.jpg" alt="Profile Photo" /> -->
+        <!-- Add your profile photo here -->
+        <h1>Yash Rajput</h1>
+        <p>
+          Hi, I’m Yash Rajput, a data scientist specializing in machine
+          learning, predictive analytics, and custom model building. I am
+          passionate about helping businesses leverage their data for impactful
+          insights and decision-making. Feel free to reach out to me for
+          personalized data solutions, consultations, or project collaborations.
+        </p>
+      </div>
+
+      <!-- Contact Details -->
+      <div class="profile-details">
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:yashrajput2163@gmail.com">yashrajput2163@gmail.com</a>
+        </p>
+        <p><strong>Phone:</strong> <a href="tel:6232967977">6232967977</a></p>
+        <p>
+          <strong>GitHub:</strong>
+          <a href="https://github.com/yash2163" target="_blank"
+            >github.com/yash2163</a
+          >
+        </p>
+        <p>
+          <strong>LinkedIn:</strong>
+          <a href="https://linkedin.com/in/yash2163" target="_blank"
+            >linkedin.com/in/yash2163</a
+          >
+        </p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Contact Me</h2>
+        <form action="submit_contact_form.php" method="POST">
+          <!-- Name -->
+          <input type="text" name="name" placeholder="Your Name" required />
+
+          <!-- Email -->
+          <input type="email" name="email" placeholder="Your Email" required />
+
+          <!-- Subject -->
+          <input type="text" name="subject" placeholder="Subject" required />
+
+          <!-- Message -->
+          <textarea
+            name="message"
+            rows="6"
+            placeholder="Describe your request"
+            required
+          ></textarea>
+
+          <!-- Urgency Level -->
+          <label for="urgency">How urgent is your request?</label>
+          <select name="urgency" id="urgency">
+            <option value="low">Low - No rush</option>
+            <option value="medium">Medium - Within a week</option>
+            <option value="high">High - Within a few days</option>
+            <option value="urgent">Urgent - Immediate assistance</option>
+          </select>
+
+          <!-- Submit Button -->
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
