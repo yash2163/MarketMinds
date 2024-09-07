@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Prediction Results</title>
+  </head>
+  <body>
+    <h1>Sales Prediction Results</h1>
+
+    <h3>Sales Prediction for the Next 6 Months</h3>
+    <img src="{{ sales_plot_url }}" alt="Sales Prediction Plot" />
+
+    <h4>Predictions Summary</h4>
+    <ul>
+      <li>Highest Sales Date: {{ sales_summary['highest_sales_date'] }}</li>
+      <li>Lowest Sales Date: {{ sales_summary['lowest_sales_date'] }}</li>
+    </ul>
+
+    <h4>Detailed Predictions</h4>
+    <table border="1">
+      <tr>
+        <th>Date</th>
+        <th>Predicted Sales</th>
+      </tr>
+      {% for prediction in predictions %}
+      <tr>
+        <td>{{ prediction['Date'] }}</td>
+        <td>{{ prediction['Predicted Sales'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

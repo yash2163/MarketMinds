@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Segmentation Results</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul > li {
+        margin-bottom: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Customer Segmentation Results</h1>
+
+    <h2>Cluster Plot</h2>
+    <img
+      src="{{ cluster_plot_url }}"
+      alt="Cluster Plot depicting customer segments based on key features."
+    />
+
+    <h2>Feature Importance Plot</h2>
+    <img
+      src="{{ feature_importance_plot_url }}"
+      alt="Plot showing the importance of different features in clustering."
+    />
+
+    <h2>Cluster Information</h2>
+    <ul>
+      {% for cluster, info in cluster_info.items() %}
+      <li>
+        <strong>Cluster {{ cluster }}:</strong>
+        <ul>
+          {% for feature, value in info.items() %}
+          <li>{{ feature }}: {{ value }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('index') }}">Go Back</a>
+  </body>
+</html>
