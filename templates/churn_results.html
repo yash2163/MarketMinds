@@ -7,13 +7,131 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+    <!-- Internal CSS for this page -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #f8f9fa;
+      }
+
+      /* Navigation Bar Styling */
+      .navbar {
+        background-color: #007bff;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+
+      .navbar-brand {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .navbar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar-nav li {
+        display: inline;
+      }
+
+      .navbar-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .navbar-nav a:hover {
+        text-decoration: underline;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      .img-container {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .img-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .btn-download {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .btn-download:hover {
+        background-color: #0056b3;
+      }
+
+      /* Table Styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
   </head>
   <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">MarketMinds</a>
+        <ul class="navbar-nav">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="#churn-plot">Churn Plot</a></li>
+          <li><a href="#churn-table">Churn Results Table</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <h1>Churn Prediction Results</h1>
-    <img src="{{ plot_url }}" alt="Churn Plot" />
-    <h2>Churn Results Table</h2>
-    {{ churn_results|safe }}
-    <a href="{{ url_for('download_churn_results') }}"
+
+    <!-- Churn Plot Section -->
+    <h2 id="churn-plot">Churn Plot</h2>
+    <div class="img-container">
+      <img src="{{ plot_url }}" alt="Churn Plot" />
+    </div>
+
+    <!-- Churn Results Table Section -->
+    <h2 id="churn-table">Churn Results Table</h2>
+    <div>{{ churn_results|safe }}</div>
+
+    <!-- Download Button -->
+    <a href="{{ url_for('download_churn_results') }}" class="btn-download"
       >Download Churn Results CSV</a
     >
   </body>

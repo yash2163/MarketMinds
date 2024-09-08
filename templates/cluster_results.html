@@ -4,58 +4,145 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Segmentation Results</title>
+    <!-- Internal CSS -->
     <style>
       body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
         margin: 20px;
+        background-color: #f8f9fa;
       }
+
+      /* Navigation Bar Styling */
+      .navbar {
+        background-color: #007bff;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+
+      .navbar-brand {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .navbar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar-nav li {
+        display: inline;
+      }
+
+      .navbar-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .navbar-nav a:hover {
+        text-decoration: underline;
+      }
+
       h1,
       h2 {
         color: #333;
       }
+
       ul {
         list-style-type: none;
         padding: 0;
       }
+
       ul > li {
         margin-bottom: 10px;
       }
+
       table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 20px;
       }
+
       table,
       th,
       td {
         border: 1px solid #ddd;
       }
+
       th,
       td {
         padding: 8px;
         text-align: left;
       }
+
       th {
         background-color: #f2f2f2;
+      }
+
+      .btn-back {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .btn-back:hover {
+        background-color: #0056b3;
+      }
+
+      .img-container {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .img-container img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
   <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">MarketMinds</a>
+        <ul class="navbar-nav">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="#cluster-plot">Cluster Plot</a></li>
+          <li><a href="#feature-importance">Feature Importance</a></li>
+          <li><a href="#cluster-info">Cluster Information</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <h1>Customer Segmentation Results</h1>
 
-    <h2>Cluster Plot</h2>
-    <img
-      src="{{ cluster_plot_url }}"
-      alt="Cluster Plot depicting customer segments based on key features."
-    />
+    <h2 id="cluster-plot">Cluster Plot</h2>
+    <div class="img-container">
+      <img
+        src="{{ cluster_plot_url }}"
+        alt="Cluster Plot depicting customer segments based on key features."
+      />
+    </div>
 
-    <h2>Feature Importance Plot</h2>
-    <img
-      src="{{ feature_importance_plot_url }}"
-      alt="Plot showing the importance of different features in clustering."
-    />
+    <h2 id="feature-importance">Feature Importance Plot</h2>
+    <div class="img-container">
+      <img
+        src="{{ feature_importance_plot_url }}"
+        alt="Plot showing the importance of different features in clustering."
+      />
+    </div>
 
-    <h2>Cluster Information</h2>
+    <h2 id="cluster-info">Cluster Information</h2>
     <ul>
       {% for cluster, info in cluster_info.items() %}
       <li>
@@ -69,6 +156,6 @@
       {% endfor %}
     </ul>
 
-    <a href="{{ url_for('index') }}">Go Back</a>
+    <a href="{{ url_for('index') }}" class="btn-back">Go Back</a>
   </body>
 </html>
